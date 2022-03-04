@@ -1,12 +1,14 @@
 const connection = require('./connection');
 
-exports.selectBoard = function(response){ 
-  
-  connection.query('  select * from board', function (error, results, fields) {
+exports.selectBoardData = function(request,response){ 
+  let query = ' SELECT * FROM project.board '; 
+   
+  connection.query(query, function (error, results, fields) {
+    
     if (error) throw error;
-    console.log('The solution is: ', results);
-    response.writeHead(200);
+
     response.send(results);
+    console.log('BoardData 정상 조회');
   });
 
 }

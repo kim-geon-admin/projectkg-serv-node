@@ -7,11 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
+  "proxy": "http://127.0.0.1:3030",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.2",
+    "cors": "^2.8.5",
     "express": "^4.17.3",
     "mysql2": "^2.3.3",
     "web-push": "^3.4.5"
