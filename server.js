@@ -20,7 +20,7 @@ app.get('/api',function(request,response){
   // response.header("Access-Control-Allow-Origin","*");
     executeQueryBoard.selectBoard(response);
 });
-*/ 
+*/   
 
 /*
 app.get('/login',function(request,response){
