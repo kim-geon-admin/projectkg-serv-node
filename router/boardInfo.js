@@ -16,4 +16,12 @@ router.get('/getContents', function(req, res, next) {
   executeQueryBoard.selectBoardData(req,res);
 });
 
+/* GET home page. */
+router.post('/insertContents', function(req, res, next) {
+  // res.render('index', { title: 'Express' });
+  
+   console.log('insertContents js 수행 됩니다');
+   executeQueryBoard.insertBoardData(req,res);
+ });
+
 module.exports = router;
