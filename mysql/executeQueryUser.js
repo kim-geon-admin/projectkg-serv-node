@@ -9,7 +9,12 @@ exports.selectUser = function(request,response){
     if (error) throw error;
    // console.log('The solution is: ', results);
    // response.writeHead(200);
-    response.send(results);
+    response.send({
+      return_code : 200,
+      jwt_token : request.jwt_token,
+      result : results
+    
+    });
     console.log('수행');
   });
 

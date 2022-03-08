@@ -9,7 +9,10 @@ app.listen(8080,function(){
     console.log('listning 8080');
 
 }); 
-app.use(cors()); 
+app.use(cors({
+    origin: true,
+    credentials: true
+  })); 
 app.use(bodyParser.json());
 //app.use(express.static('public'));
 

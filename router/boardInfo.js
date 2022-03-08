@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const executeQueryBoard = require('../mysql/executeQueryBoard');
+const validateAuth = require('../middleware/auth/validateAuth');
 const app = express();
 const bodyParser = require('body-parser');
 
@@ -9,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 /* GET home page. */
-router.get('/getContents', function(req, res, next) {
+router.get('/getContents',validateAuth.verifyToken ,function(req, res, next) {
  // res.render('index', { title: 'Express' });
  
   console.log('getContents js 수행 됩니다');
@@ -17,7 +18,7 @@ router.get('/getContents', function(req, res, next) {
 });
 
 /* GET home page. */
-router.post('/insertContents', function(req, res, next) {
+router.post('/insertContents',validateAuth.verifyToken, function(req, res, next) {
   // res.render('index', { title: 'Express' });
   
    console.log('insertContents js 수행 됩니다');

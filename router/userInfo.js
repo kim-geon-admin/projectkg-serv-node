@@ -3,13 +3,15 @@ const router = express.Router();
 const executeQueryUser = require('../mysql/executeQueryUser');
 const app = express();
 const bodyParser = require('body-parser');
+const signAuth = require('../middleware/auth/signAuth');
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
 /* GET home page. */
-router.post('/userInfo', function(req, res, next) {
+router.post('/userInfo',signAuth.jwtToken,function(req, res, next) {
  // res.render('index', { title: 'Express' });
   console.log(req.body);
   executeQueryUser.selectUser(req,res);
