@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
        const token = jwt.sign({
             id
         }, process.env.JWT_SECRET, {
-            expiresIn: '3m',
+            expiresIn: '1h',
             issuer: '토큰발급자',
         });
 
