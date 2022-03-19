@@ -13,6 +13,22 @@ exports.selectBoardData = function(request,response){
 
 }
 
+exports.selectDetailData = function(request,response){ 
+  //let query = ' SELECT * FROM project.board '; 
+  console.log(request.query);
+  let paramArr = [request.query.id,request.query.user_id];
+  let query =  'SELECT id,subject,contents,user_id  FROM project.board';
+      query += ' where id= ?  and user_id= ? ';
+  connection.query(query,paramArr, function (error, results, fields) {
+    
+    if (error) throw error;
+
+    response.send(results);
+    console.log('Deatail BoardData 정상 조회');
+  });
+
+}
+
 
 exports.insertBoardData = function(request,response){ 
   let query = ' INSERT INTO `project`.`board` (`subject`, `contents`, `user_id`,`creation_timestamp`) ';
