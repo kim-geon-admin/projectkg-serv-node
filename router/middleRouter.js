@@ -5,11 +5,13 @@ const router = express.Router();
 const userInfo = require('./userInfo.js');
 const boardInfo = require('./boardInfo.js');
 const homeInfo = require('./homeInfo.js');
+const fileInfo = require('./fileInfo.js');
 //const user = require('./user.js')
 
 router.use('/user', userInfo);
 router.use('/board', boardInfo);
 router.use('/home', homeInfo);
+router.use('/file', fileInfo);
 //router.use('/user', user);
 
 module.exports = router;
