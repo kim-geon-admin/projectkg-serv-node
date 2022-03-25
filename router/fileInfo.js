@@ -9,6 +9,7 @@ const path = require("path");
 
 var multer = require('multer'); // express에 multer모듈 적용 (for 파일업로드)
 
+var fs = require('fs');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -16,12 +17,24 @@ app.use(cors());
 app.use(fileupload());
 app.use(express.static("files"));
 
+
+
+
 const storage = multer.diskStorage({
       destination : function(req,file,cb){
         cb(null,'../kg/public/img')
       },
       filename : function(req,file,cb){
-        cb(null,file.originalname)
+        console.log(file);
+        let array = file.originalname.split('.'); 
+        array[0] = array[0] + '_'; 
+        array[1] = '.' + array[1]; 
+        array.splice(1, 0, Date.now().toString()); 
+        const result = array.join('');
+
+        cb(null,result)
+        
+        //cb(null,file.originalname)
       }
 
 })
@@ -44,6 +57,24 @@ const uploadSingleImage = upload.single('userfile');
 
 //const uploadSingleImage = multer({ storage: storage })
 
+const readDir = function(req, res, next) {
+
+  fs.readdir('../kg/public/img', function(err, filelist){  // 배열 형태로 출력
+
+    const file = req.file;
+    res.status(200).send({
+        filename: file.filename,
+        mimetype: file.mimetype,
+        originalname: file.originalname,
+        size: file.size,
+        fieldname: file.fieldname,
+        fileList : filelist
+    })
+    console.log(filelist);
+  
+  })
+
+ }
 
 
 /* GET home page. */
@@ -52,20 +83,16 @@ router.post('/fileUpload',validateAuth.verifyToken, function(req, res, next) {
    console.log('fileUpload js 수행 됩니다');
 
    uploadSingleImage(req, res, function (err) {
-
+   
     if (err) {
         return res.status(400).send({ message: err.message })
     }
 
     // Everything went fine.
-    const file = req.file;
-      res.status(200).send({
-          filename: file.filename,
-          mimetype: file.mimetype,
-          originalname: file.originalname,
-          size: file.size,
-          fieldname: file.fieldname
-      })
+    /*
+  
+      */
+     next();
   })
 
    /*
@@ -81,6 +108,6 @@ router.post('/fileUpload',validateAuth.verifyToken, function(req, res, next) {
     res.status(200).send({ message: "파일 전송 성공", code: 200 });
   });
  */
- });
+ },readDir);
 
 module.exports = router;
