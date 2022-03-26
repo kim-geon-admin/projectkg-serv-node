@@ -2,7 +2,8 @@ const connection = require('./connection');
 
 exports.selectBoardData = function(request,response){ 
   //let query = ' SELECT * FROM project.board '; 
-  let query =  'SELECT id,subject,contents,user_id,DATE_FORMAT(creation_timestamp, "%Y-%m-%d %H:%i:%s") as creation_timestamp FROM project.board';
+  let query =  'SELECT id,subject,contents,user_id,DATE_FORMAT(creation_timestamp, "%Y-%m-%d %H:%i:%s") as creation_timestamp FROM project.board ';
+      query += 'order by creation_timestamp desc ';
   connection.query(query, function (error, results, fields) {
     
     if (error) throw error;

@@ -62,22 +62,36 @@ const readDir = function(req, res, next) {
   fs.readdir('../kg/public/img', function(err, filelist){  // 배열 형태로 출력
 
     const file = req.file;
-    res.status(200).send({
+    if(file != undefined ){
+      res.status(200).send({
         filename: file.filename,
         mimetype: file.mimetype,
         originalname: file.originalname,
         size: file.size,
         fieldname: file.fieldname,
-        fileList : filelist
+        fileList : filelist,
+        isSuccess : 'success'
     })
-    console.log(filelist);
+
+    }else{
+      res.status(200).send({
+    
+        fileList : filelist,
+        isSuccess : 'success'
+    })
+    }
   
+    //console.log(filelist);
+   
   })
 
  }
 
 
-/* GET home page. */
+ /* push img file */
+router.get('/fileList',validateAuth.verifyToken,readDir);
+
+/* push img file */
 router.post('/fileUpload',validateAuth.verifyToken, function(req, res, next) {
   
    console.log('fileUpload js 수행 됩니다');
