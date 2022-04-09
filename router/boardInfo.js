@@ -21,6 +21,9 @@ router.get('/getDetailContents',validateAuth.verifyToken ,function(req, res, nex
   // res.render('index', { title: 'Express' });
   
    console.log('getDetailContents js 수행 됩니다');
+  //조회 카운트 증가 수행
+   executeQueryBoard.updateSearchCount(req,res);
+
    executeQueryBoard.selectDetailData(req,res);
  });
 
