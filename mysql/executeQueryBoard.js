@@ -14,6 +14,21 @@ exports.selectBoardData = function(request,response){
 
 }
 
+exports.selectTopBoardData = function(request,response){ 
+  //let query = ' SELECT * FROM project.board '; 
+  let query =  'SELECT id,subject,contents,user_id,DATE_FORMAT(creation_timestamp, "%Y-%m-%d %H:%i:%s") as creation_timestamp,select_count FROM project.board ';
+      query += 'order by select_count desc limit 8';
+  connection.query(query, function (error, results, fields) {
+    
+    if (error) throw error;
+
+    response.send(results);
+    console.log('TopBoardData 정상 조회');
+  });
+
+}
+
+
 exports.selectDetailData = function(request,response){ 
   //let query = ' SELECT * FROM project.board '; 
   console.log(request.query);

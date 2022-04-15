@@ -17,6 +17,16 @@ router.get('/getContents',validateAuth.verifyToken ,function(req, res, next) {
   executeQueryBoard.selectBoardData(req,res);
 });
 
+/* GET home page. */
+router.get('/getTopContents',validateAuth.verifyToken ,function(req, res, next) {
+  // res.render('index', { title: 'Express' });
+  
+   console.log('getTopContents js 수행 됩니다');
+   executeQueryBoard.selectTopBoardData(req,res);
+ });
+
+  
+
 router.get('/getDetailContents',validateAuth.verifyToken ,function(req, res, next) {
   // res.render('index', { title: 'Express' });
   
