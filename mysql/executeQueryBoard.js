@@ -10,7 +10,7 @@ exports.selectBoardData = function(request,response){
 
     response.send(results);
     console.log('BoardData 정상 조회');
-  });
+  }); 
 
 }
 
